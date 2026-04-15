@@ -148,7 +148,7 @@ flowchart TD
 
 ---
 
-## 📂 Project Structure
+## ⚙️ Component Architecture
 ```mermaid
 flowchart TB
     subgraph Frontend
@@ -194,5 +194,49 @@ flowchart TB
     J --> E
     K --> E
     E --> A
+```
 
-    
+## 📂 Project Structure
+
+```text
+dermavision-ai/
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   ├── core/
+│   │   ├── services/
+│   │   ├── models/
+│   │   └── utils/
+│   └── requirements.txt
+├── frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── components/
+│   │   ├── hooks/
+│   │   ├── pages/
+│   │   └── types/
+│   └── package.json
+└── README.md
+```
+
+### 1. Setup / Installation
+Very important. People should know how to run it.
+
+```md
+## ⚙️ Setup Instructions
+```
+
+### Backend
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+```
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
