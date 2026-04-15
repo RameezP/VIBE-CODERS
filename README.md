@@ -62,37 +62,50 @@ A **smartphone-based AI tool** that provides:
 
 ---
 
-## 🔁 System Architecture
+## 🏗️ System Architecture
+
+```mermaid
 flowchart TD
+
     A[User uploads facial image] --> B[Frontend React + Vite]
     B --> C[POST /api/analyze]
     C --> D[FastAPI Backend]
+
     D --> E[Image Validation Gate]
     E --> E1[File type check]
     E --> E2[File size check]
     E --> E3[Image dimension check]
     E --> E4[Face confidence check]
-    E --> F[FaceZoneService<br/>MediaPipe Face Mesh]
-    E --> G[LesionDetectionService<br/>YOLOv8]
-    E --> H[HyperpigmentationService<br/>OpenCV + LAB + CLAHE]
+
+    E --> F[FaceZoneService - MediaPipe]
+    E --> G[LesionDetectionService - YOLOv8]
+    E --> H[HyperpigmentationService - OpenCV]
+
     F --> I[Zone masks + landmarks]
     G --> J[Lesion detections + counts]
     H --> K[Heatmap + pigmentation metrics]
+
     I --> L[ResultAggregatorService]
     J --> L
     K --> L
+
     L --> M[Annotated image + severity grade]
+
     I --> N[SimulationService]
     K --> N
-    N --> O[2-week preview + 4-week preview]
+    N --> O1[2-week preview]
+    N --> O2[4-week preview]
+
     M --> P[Structured JSON Response]
-    O --> P
+    O1 --> P
+    O2 --> P
+
     P --> Q[Frontend Results Page]
     Q --> R[Annotated image]
     Q --> S[Severity badge]
     Q --> T[Zone breakdown]
     Q --> U[Simulation comparison]
-
+```
 
 ---
 
@@ -136,6 +149,7 @@ flowchart TD
 ---
 
 ## 📂 Project Structure
+```mermaid
 flowchart TB
     subgraph Frontend
         A[React + Vite + TypeScript]
@@ -143,6 +157,7 @@ flowchart TB
         C[Components]
         D[API Layer]
     end
+
     subgraph Backend
         E[FastAPI]
         F[Validation]
@@ -152,28 +167,32 @@ flowchart TB
         J[ResultAggregatorService]
         K[SimulationService]
     end
+
     subgraph CV_Models
         L[MediaPipe]
         M[YOLOv8]
         N[OpenCV]
     end
+
     A --> D
     D --> E
     E --> F
     F --> G
     F --> H
     F --> I
+
     G --> L
     H --> M
     I --> N
+
     G --> J
     H --> J
     I --> J
     G --> K
     I --> K
+
     J --> E
     K --> E
     E --> A
-
 
     
